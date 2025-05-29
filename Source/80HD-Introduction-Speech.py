@@ -11,5 +11,5 @@ engine.setProperty('rate', rate-50)
 #engine.runAndWait()
 
 
-engine.say("Hello humans, I am 80 H D");
+engine.say("Hello humans I am 80 HD");
 engine.runAndWait()
