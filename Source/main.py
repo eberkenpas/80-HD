@@ -16,7 +16,7 @@ def main():
     board = initialize_motors()
     
     # Greet at startup!
-    tts.speak("Hello, I am 80 H D. Initializing motors.", volume=80)
+    tts.speak_blocking("Hello, I am 80 H D. Initializing motors.", volume=80)
     
     directions = ['forward', 'backward', 'left', 'right']
     for i in range(20):

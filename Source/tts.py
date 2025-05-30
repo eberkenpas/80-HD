@@ -2,21 +2,28 @@
 import subprocess
 import threading
 
-# Default voice (can change to 'slt' or 'rms' if you prefer)
-VOICE = "kal"
+# Default voice
+VOICE = "kal"  # or "slt", "rms", "awb"
 
 def speak(text, volume=80):
     """
-    Speak text using flite in a non-blocking thread.
+    Non-blocking: Speak text in background thread.
     
     :param text: Text to speak
-    :param volume: Percent volume (0-100), system level
+    :param volume: Volume % (0-100)
     """
     def _speak():
-        # Set system volume first (change card number if needed)
         subprocess.run(["amixer", "-c", "2", "sset", "Speaker", f"{volume}%"])
-        # Speak using flite
         subprocess.Popen(["flite", "-voice", VOICE, "-t", text])
     
-    # Run _speak in a background thread
     threading.Thread(target=_speak, daemon=True).start()
+
+def speak_blocking(text, volume=80):
+    """
+    Blocking: Speak text and wait until done.
+    
+    :param text: Text to speak
+    :param volume: Volume % (0-100)
+    """
+    subprocess.run(["amixer", "-c", "2", "sset", "Speaker", f"{volume}%"])
+    subprocess.run(["flite", "-voice", VOICE, "-t", text])
