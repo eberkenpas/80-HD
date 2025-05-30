@@ -6,6 +6,7 @@ sys.path.append('/home/pi/hiwonder-toolbox')
 import ros_robot_controller_sdk as sdk
 
 SPEED = 1
+STOP = 0
 
 def initialize_motors():
     board = sdk.Board(device='/dev/ttyACM0', baudrate=1000000)
@@ -17,6 +18,9 @@ def main():
     
     # Greet at startup!
     tts.speak_blocking("Hello, I am 80 H D. Initializing motors.", volume=80)
+
+    #pause for 1 second
+    time.sleep(1)
     
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
     for i in range(20):
@@ -37,7 +41,7 @@ def main():
             board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
         
         time.sleep(1)
-        board.set_motor_speed([[1, 0], [2, 0], [3, 0], [4, 0]])
+        board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
         time.sleep(0.5)
 
 if __name__ == '__main__':
