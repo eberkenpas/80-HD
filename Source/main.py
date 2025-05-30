@@ -17,11 +17,23 @@ def main():
     board = initialize_motors()
     
     # Greet at startup!
-    tts.speak_blocking("Hello, I am 80 H D. Initializing motors.", volume=80)
+    tts.speak_blocking("Hello, I am 80 H D. ", volume=80)
+
+    #pause for 1 second
+    time.sleep(1)
+
+    tts.speak_blocking("I am a robot pet created by Ella Mae Berkenpas.", volume=80)
+
+    #pause for 1 second
+    time.sleep(1)
+
+    tts.speak_blocking("Initiatiating mobility test.", volume=80)
 
     #pause for 1 second
     time.sleep(1)
     
+
+    #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
     for i in range(20):
         direction = random.choice(directions)
