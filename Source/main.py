@@ -44,9 +44,9 @@ def main():
         elif direction == 'backward':
             board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, SPEED], [4, SPEED]])
         elif direction == 'left':
-            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
-        elif direction == 'right':
             board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
+        elif direction == 'right':
+            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
         elif direction == 'turn left':
             board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
         elif direction == 'turn right':
