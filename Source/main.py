@@ -32,9 +32,9 @@ def main():
         elif direction == 'right':
             board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
         elif direction == 'turn left':
-            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, SPEED], [4, -SPEED]])
+            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
         elif direction == 'turn right':
-            board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, -SPEED], [4, SPEED]])
+            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
         
         time.sleep(1)
         board.set_motor_speed([[1, 0], [2, 0], [3, 0], [4, 0]])
