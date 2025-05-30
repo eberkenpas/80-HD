@@ -1,20 +1,14 @@
-import pyttsx3
+import subprocess
 import threading
 
 def speak(text):
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 160)
-    engine.setProperty('volume', 1.0)
-    engine.say(text)
-    engine.runAndWait()  # blocking INSIDE this thread
+    subprocess.Popen(["flite", "-voice", "slt", "-t", text])
 
-# Main program
+# Main loop
 print("Doing other work...")
 
-# Start TTS in background
 threading.Thread(target=speak, args=("Hello humans, I am 80-HD!",), daemon=True).start()
 
-# Meanwhile, keep doing other stuff
 for i in range(10):
     print(f"Main loop iteration {i}")
     import time
