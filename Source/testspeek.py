@@ -2,7 +2,7 @@ import subprocess
 import threading
 
 def speak(text):
-    subprocess.Popen(["flite", "-voice", "kal16", "-t", text])
+    subprocess.Popen(["flite", "-voice", "kal", "-t", text])
 
 # Main loop
 print("Doing other work...")
