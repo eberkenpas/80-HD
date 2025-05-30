@@ -27,11 +27,12 @@ def main():
     #pause for 1 second
     time.sleep(1)
 
-    tts.speak_blocking("This is Ella's Siena School Strenths Project.", volume=80)
+    tts.speak_blocking("I am Ella's 5th grade strengths project.", volume=80)
 
     #pause for 1 second
     time.sleep(1)
     
+    tts.speak_blocking("I will now test my abilities.", volume=80)
 
     #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
