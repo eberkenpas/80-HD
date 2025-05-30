@@ -18,19 +18,23 @@ def main():
     # Greet at startup!
     tts.speak_blocking("Hello, I am 80 H D. Initializing motors.", volume=80)
     
-    directions = ['forward', 'backward', 'left', 'right']
+    directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
     for i in range(20):
         direction = random.choice(directions)
         tts.speak(f"Moving {direction}.", volume=80)
         
         if direction == 'forward':
-            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
+            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, -SPEED], [4, -SPEED]])
         elif direction == 'backward':
-            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
+            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, SPEED], [4, SPEED]])
         elif direction == 'left':
             board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
         elif direction == 'right':
             board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
+        elif direction == 'turn left':
+            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, SPEED], [4, -SPEED]])
+        elif direction == 'turn right':
+            board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, -SPEED], [4, SPEED]])
         
         time.sleep(1)
         board.set_motor_speed([[1, 0], [2, 0], [3, 0], [4, 0]])
