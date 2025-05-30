@@ -22,12 +22,12 @@ def main():
     #pause for 1 second
     time.sleep(1)
 
-    tts.speak_blocking("I am a robot pet created by Ella Mae Berkenpas.", volume=80)
+    tts.speak_blocking("I am a robot created by Ella Mae Berkenpas.", volume=80)
 
     #pause for 1 second
     time.sleep(1)
 
-    tts.speak_blocking("Initiatiating mobility test.", volume=80)
+    tts.speak_blocking("This is Ella's Siena School Strenths Project.", volume=80)
 
     #pause for 1 second
     time.sleep(1)
@@ -55,6 +55,8 @@ def main():
         time.sleep(1)
         board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
         time.sleep(0.5)
+
+    tts.speak_blocking("Test complete.", volume=80)
 
 if __name__ == '__main__':
     main()
