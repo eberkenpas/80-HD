@@ -85,7 +85,6 @@ def main():
             time.sleep(1)
             tts.speak_blocking("Hello, how are you?", volume=80)
             time.sleep(1)
-            break
         else:
             tts.speak_blocking("I do not know how to do that.", volume=80)
 
