@@ -42,7 +42,7 @@ def speak_introduction():
     tts.speak_blocking("Please tell me what you want to do.", volume=80)
     time.sleep(1)
 
-def explore():
+def explore(board):
     #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
     for i in range(5):
@@ -122,11 +122,11 @@ def main():
         if text.lower() == "go":
             tts.speak_blocking("Ok, I will go explore.")
             time.sleep(1)
-            explore()            
+            explore(board)            
         if text.lower() == "explore":
             tts.speak_blocking("Ok, I will go explore.")
             time.sleep(1)
-            explore()
+            explore(board)
         if text.lower() == "hello":
             tts.speak_blocking("Ok, I will say hello.")
             time.sleep(1)
