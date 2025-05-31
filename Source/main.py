@@ -53,17 +53,18 @@ def main():
     
     speak_introduction()
 
-    # Listen for user input
-    with sr.Microphone(device_index=2) as source:
-        print("Listening...")
+    while True:
+        # Listen for user input
+        with sr.Microphone(device_index=2) as source:
+            print("Listening...")
         audio = recognizer.listen(source)
 
         # Recognize speech
         try:
             print("Recognizing (offline)...")
             text = recognizer.recognize_sphinx(audio)
-            print("You said:", text)
-            tts.speak_blocking("You said: " + text, volume=80)
+            print("You would like me to:", text)
+            tts.speak_blocking("You would like me to: " + text, volume=80)
         except sr.UnknownValueError:
             print("Could not understand audio.")
             tts.speak_blocking("I did not understand you. Please try again.", volume=80)
@@ -71,6 +72,14 @@ def main():
             print("PocketSphinx error:", e)
             tts.speak_blocking("I did not understand you. Please try again.", volume=80)
 
+        # Process user command with default being " I do not know how to do that"
+        if text == "quit":
+            tts.speak_blocking("Goodbye!", volume=80)
+            break
+        else:
+            tts.speak_blocking("I do not know how to do that.", volume=80)
+
+    tts.speak_blocking("I will now test my abilities.")
 
     #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
