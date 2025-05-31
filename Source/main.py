@@ -78,15 +78,13 @@ def main():
         # Process user command with default being "I do not know how to do that"
         if text.lower() == "go":
             tts.speak_blocking("Ok, I will go.", volume=80)
-            break
-        if text.lower() == "go":
-            tts.speak_blocking("Ok, I will move.", volume=80)
+            time.sleep(1)
             break
         if text.lower() == "hello":
             tts.speak_blocking("Ok, I will say hello.", volume=80)
-            sleep(1)
+            time.sleep(1)
             tts.speak_blocking("Hello, how are you?", volume=80)
-            sleep(1)
+            time.sleep(1)
             break
         else:
             tts.speak_blocking("I do not know how to do that.", volume=80)
