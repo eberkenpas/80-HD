@@ -2,6 +2,7 @@ import tts
 import random
 import time
 import sys
+import speech_recognition as sr
 sys.path.append('/home/pi/hiwonder-toolbox')
 import ros_robot_controller_sdk as sdk
 import subprocess
@@ -14,13 +15,13 @@ def initialize_motors():
     board.enable_reception(True)
     return board
 
-def main():
-    #Set Master Volume to 80%
-    subprocess.run(['amixer', 'sset', 'Master', '80%'])
+def initialize_speech_recognition():
+    recognizer = sr.Recognizer()
+    with sr.Microphone(device_index=2) as source:
+        recognizer.adjust_for_ambient_noise(source)
+    return recognizer
 
-    # Initialize the motors
-    board = initialize_motors()
-    
+def speak_introduction():
     # Greet at startup!
     tts.speak_blocking("Hello, I am 80 H D. ", volume=80)
 
@@ -37,7 +38,39 @@ def main():
     #pause for 1 second
     time.sleep(1)
     
-    tts.speak_blocking("I will now test my abilities.", volume=80)
+    tts.speak_blocking("Please tell me what you want to do.", volume=80)
+    time.sleep(1)
+
+def main():
+    #Set Master Volume to 80%
+    subprocess.run(['amixer', 'sset', 'Master', '80%'])
+
+    # Initialize the speech recognition
+    recognizer = initialize_speech_recognition()
+
+    # Initialize the motors
+    board = initialize_motors()
+    
+    speak_introduction()
+
+    # Listen for user input
+    with sr.Microphone(device_index=2) as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
+
+        # Recognize speech
+        try:
+            print("Recognizing (offline)...")
+            text = recognizer.recognize_sphinx(audio)
+            print("You said:", text)
+            tts.speak_blocking("You said: " + text, volume=80)
+        except sr.UnknownValueError:
+            print("Could not understand audio.")
+            tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+        except sr.RequestError as e:
+            print("PocketSphinx error:", e)
+            tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+
 
     #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
