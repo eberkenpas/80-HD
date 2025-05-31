@@ -41,7 +41,7 @@ def main():
 
     #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
-    for i in range(20):
+    for i in range(5):
         direction = random.choice(directions)
         tts.speak(f"Moving {direction}.", volume=80)
         
