@@ -64,6 +64,11 @@ def main():
             time.sleep(1)
             audio = recognizer.listen(source)
 
+        #Make a list of words and find the one that is closest to the command list
+        command_list = ["go", "hello", "talk to me", "lucy"]
+        closest_word = min(command_list, key=lambda x: recognizer.distance(x, audio))
+        print(f"Closest word: {closest_word}")
+
         # Recognize speech
         try:
             print("Recognizing (offline)...")
