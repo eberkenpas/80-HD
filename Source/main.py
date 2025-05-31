@@ -2,6 +2,7 @@ import tts
 import random
 import time
 import sys
+import difflib
 import speech_recognition as sr
 sys.path.append('/home/pi/hiwonder-toolbox')
 import ros_robot_controller_sdk as sdk
@@ -64,15 +65,16 @@ def main():
             time.sleep(1)
             audio = recognizer.listen(source)
 
-        #Make a list of words and find the one that is closest to the command list
-        command_list = ["go", "hello", "talk to me", "lucy"]
-        closest_word = min(command_list, key=lambda x: recognizer.distance(x, audio))
-        print(f"Closest word: {closest_word}")
-
         # Recognize speech
         try:
             print("Recognizing (offline)...")
             text = recognizer.recognize_sphinx(audio)
+           
+            #Make a list of words and find the one that is closest to the command list
+            command_list = ["go", "hello", "talk to me", "lucy"]
+            closest_word = difflib.get_close_matches(text, command_list, n=1, cutoff=0.8)
+            print(f"Closest word: {closest_word}")
+            text = closest_word[0]
             print("You would like me to:", text)
             tts.speak_blocking(f"You would like me to: {text}", volume=80)
         except sr.UnknownValueError:
