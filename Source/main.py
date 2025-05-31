@@ -98,7 +98,8 @@ def main():
 
             # Make a list of words and find the one that is closest to the command list
             command_list = ["go", "explore", "hello", "talk to me", "lucy"]
-            closest_word = difflib.get_close_matches(text, command_list, n=1, cutoff=0.4)
+            # Check if text contains any of the words in the command list
+            closest_word = difflib.get_close_matches(text.lower(), command_list, n=1, cutoff=0.4)
             if closest_word:
                 text = closest_word[0]
                 print(f"Closest word: {closest_word}")
