@@ -42,6 +42,31 @@ def speak_introduction():
     tts.speak_blocking("Please tell me what you want to do.", volume=80)
     time.sleep(1)
 
+def explore():
+    #Test Code
+    directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
+    for i in range(5):
+        direction = random.choice(directions)
+        tts.speak(f"Moving {direction}.")
+        
+        if direction == 'forward':
+            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, -SPEED], [4, -SPEED]])
+        elif direction == 'backward':
+            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, SPEED], [4, SPEED]])
+        elif direction == 'left':
+            board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
+        elif direction == 'right':
+            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
+        elif direction == 'turn left':
+            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
+        elif direction == 'turn right':
+            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
+        
+        time.sleep(1)
+        board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
+        time.sleep(0.5)
+
+
 def main():
     #Set Master Volume to 80%
     print("Setting Master Volume to 80%")
@@ -70,36 +95,41 @@ def main():
             print("Recognizing (offline)...")
             text = recognizer.recognize_sphinx(audio)
             print("Text:", text)
-            
+
             # Make a list of words and find the one that is closest to the command list
-            command_list = ["go", "hello", "talk to me", "lucy"]
-            closest_word = difflib.get_close_matches(text, command_list, n=1, cutoff=0.3)
+            command_list = ["go", "explore", "hello", "talk to me", "lucy"]
+            closest_word = difflib.get_close_matches(text, command_list, n=1, cutoff=0.4)
             if closest_word:
                 text = closest_word[0]
                 print(f"Closest word: {closest_word}")
                 print("You would like me to:", text)
-                tts.speak_blocking(f"You would like me to: {text}", volume=80)
+                tts.speak_blocking(f"You would like me to: {text}")
             else:
                 print("No close match found.")
-                tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+                tts.speak_blocking("I did not understand you. Please try again.")
                 continue
         except sr.UnknownValueError:
             print("Could not understand audio.")
-            tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+            tts.speak_blocking("I did not understand you. Please try again.")
             continue
         except sr.RequestError as e:
             print("PocketSphinx error:", e)
-            tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+            tts.speak_blocking("I did not understand you. Please try again.")
             continue
 
         # Process user command with default being "I do not know how to do that"
         if text.lower() == "go":
-            tts.speak_blocking("Ok, I will go.", volume=80)
+            tts.speak_blocking("Ok, I will go explore.")
             time.sleep(1)
-        elif text.lower() == "hello":
-            tts.speak_blocking("Ok, I will say hello.", volume=80)
+            explore()            
+        if text.lower() == "explore":
+            tts.speak_blocking("Ok, I will go explore.")
             time.sleep(1)
-            tts.speak_blocking("Hello, how are you?", volume=80)
+            explore()
+        if text.lower() == "hello":
+            tts.speak_blocking("Ok, I will say hello.")
+            time.sleep(1)
+            tts.speak_blocking("Hello, how are you?")
             time.sleep(1)
         if text.lower() == "talk to me":
             tts.speak_blocking("Ok, I will talk to you.")
@@ -111,34 +141,10 @@ def main():
             time.sleep(1)
             tts.speak_blocking("Bark! Bark! Bark!")
             time.sleep(1)
-        else:
-            tts.speak_blocking("I do not know how to do that.", volume=80)
 
     tts.speak_blocking("I will now test my abilities.")
 
-    #Test Code
-    directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
-    for i in range(5):
-        direction = random.choice(directions)
-        tts.speak(f"Moving {direction}.", volume=80)
-        
-        if direction == 'forward':
-            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, -SPEED], [4, -SPEED]])
-        elif direction == 'backward':
-            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, SPEED], [4, SPEED]])
-        elif direction == 'left':
-            board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
-        elif direction == 'right':
-            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
-        elif direction == 'turn left':
-            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
-        elif direction == 'turn right':
-            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
-        
-        time.sleep(1)
-        board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
-        time.sleep(0.5)
-
+    
     tts.speak_blocking("Test complete.", volume=80)
 
 if __name__ == '__main__':
