@@ -101,7 +101,22 @@ def main():
             #make a list of the words in the text
             text_words = text.lower().split()
             # Check if the list for the closest word to the command list prioritizing the first command if there are two matches
-            closest_word = difflib.get_close_matches(text_words, command_list, n=1, cutoff=0.3)
+            matches = []
+            for word in text_words:
+                match = difflib.get_close_matches(word, command_list, n=1, cutoff=0.6)
+                if match:
+                    matches.append(match[0])
+
+            if matches:
+                text = matches[0]
+                print(f"Matched command: {text}")
+                tts.speak_blocking(f"You would like me to: {text}")
+            else:
+                print("No close match found.")
+                tts.speak_blocking("I did not understand you. Please try again.")
+                continue
+
+
             print(f"Closest word: {closest_word}")
             if closest_word:
                 text = closest_word[0]
