@@ -70,13 +70,18 @@ def main():
             print("Recognizing (offline)...")
             text = recognizer.recognize_sphinx(audio)
            
-            #Make a list of words and find the one that is closest to the command list
+            # Make a list of words and find the one that is closest to the command list
             command_list = ["go", "hello", "talk to me", "lucy"]
             closest_word = difflib.get_close_matches(text, command_list, n=1, cutoff=0.8)
-            print(f"Closest word: {closest_word}")
-            text = closest_word[0]
-            print("You would like me to:", text)
-            tts.speak_blocking(f"You would like me to: {text}", volume=80)
+            if closest_word:
+                text = closest_word[0]
+                print(f"Closest word: {closest_word}")
+                print("You would like me to:", text)
+                tts.speak_blocking(f"You would like me to: {text}", volume=80)
+            else:
+                print("No close match found.")
+                tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+                continue
         except sr.UnknownValueError:
             print("Could not understand audio.")
             tts.speak_blocking("I did not understand you. Please try again.", volume=80)
@@ -90,7 +95,7 @@ def main():
         if text.lower() == "go":
             tts.speak_blocking("Ok, I will go.", volume=80)
             time.sleep(1)
-        if text.lower() == "hello":
+        elif text.lower() == "hello":
             tts.speak_blocking("Ok, I will say hello.", volume=80)
             time.sleep(1)
             tts.speak_blocking("Hello, how are you?", volume=80)
