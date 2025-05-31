@@ -45,6 +45,8 @@ def main():
     #Set Master Volume to 80%
     subprocess.run(['amixer', 'sset', 'Master', '80%'])
 
+    break
+
     # Initialize the speech recognition
     recognizer = initialize_speech_recognition()
 
