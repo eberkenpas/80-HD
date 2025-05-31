@@ -109,13 +109,6 @@ def main():
 
             if matches:
                 text = matches[0]
-                print(f"Matched command: {text}")
-                tts.speak_blocking(f"You would like me to: {text}")
-            else:
-                print("No close match found.")
-                tts.speak_blocking("I did not understand you. Please try again.")
-                continue
-
 
             print(f"Closest word: {text}")
             if text:
