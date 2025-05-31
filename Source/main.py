@@ -102,7 +102,7 @@ def main():
             text_words = text.lower().split()
             # Check if the list for the closest word to the command list prioritizing the first command if there are two matches
             closest_word = difflib.get_close_matches(text_words, command_list, n=1, cutoff=0.4)
-            print(f"Closest word: {closest_word}"))
+            print(f"Closest word: {closest_word}")
             if closest_word:
                 text = closest_word[0]
                 print(f"Closest word: {closest_word}")
