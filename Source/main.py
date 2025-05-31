@@ -75,8 +75,8 @@ def main():
             continue
 
         # Process user command with default being "I do not know how to do that"
-        if text.lower() == "quit":
-            tts.speak_blocking("Goodbye!", volume=80)
+        if text.lower() == "go":
+            tts.speak_blocking("Ok, I will go.", volume=80)
             break
         else:
             tts.speak_blocking("I do not know how to do that.", volume=80)
