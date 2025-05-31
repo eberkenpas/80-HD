@@ -79,7 +79,6 @@ def main():
         if text.lower() == "go":
             tts.speak_blocking("Ok, I will go.", volume=80)
             time.sleep(1)
-            break
         if text.lower() == "hello":
             tts.speak_blocking("Ok, I will say hello.", volume=80)
             time.sleep(1)
@@ -89,6 +88,11 @@ def main():
             tts.speak_blocking("Ok, I will talk to you.")
             time.sleep(1)
             tts.speak_blocking("I am testing my abilities. I am 80 HD")
+            time.sleep(1)
+        if text.lower() == "lucy":
+            tts.speak_blocking("Ok, I will Lucy.")
+            time.sleep(1)
+            tts.speak_blocking("Bark! Bark! Bark!")
             time.sleep(1)
         else:
             tts.speak_blocking("I do not know how to do that.", volume=80)
