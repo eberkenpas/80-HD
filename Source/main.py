@@ -117,10 +117,9 @@ def main():
                 continue
 
 
-            print(f"Closest word: {closest_word}")
-            if closest_word:
-                text = closest_word[0]
-                print(f"Closest word: {closest_word}")
+            print(f"Closest word: {text}")
+            if text:
+                print(f"Closest word: {text}")
                 print("You would like me to:", text)
                 tts.speak_blocking(f"You would like me to: {text}")
             else:
