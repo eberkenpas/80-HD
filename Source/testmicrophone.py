@@ -2,8 +2,12 @@ import speech_recognition as sr
 
 recognizer = sr.Recognizer()
 
-# Use Device 0 — your USB mic
-mic = sr.Microphone(device_index=0, sample_rate=16000)
+# List devices so you can check which number is USB mic
+for i, name in enumerate(sr.Microphone.list_microphone_names()):
+    print(f"Device {i}: {name}")
+
+# After checking list, set the correct device index
+mic = sr.Microphone(device_index=2, sample_rate=48000)  # Update device_index as needed
 
 with mic as source:
     print("Adjusting for ambient noise...")
