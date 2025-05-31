@@ -57,23 +57,25 @@ def main():
         # Listen for user input
         with sr.Microphone(device_index=2) as source:
             print("Listening...")
-        audio = recognizer.listen(source)
+            audio = recognizer.listen(source)
 
         # Recognize speech
         try:
             print("Recognizing (offline)...")
             text = recognizer.recognize_sphinx(audio)
             print("You would like me to:", text)
-            tts.speak_blocking("You would like me to: " + text, volume=80)
+            tts.speak_blocking(f"You would like me to: {text}", volume=80)
         except sr.UnknownValueError:
             print("Could not understand audio.")
             tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+            continue
         except sr.RequestError as e:
             print("PocketSphinx error:", e)
             tts.speak_blocking("I did not understand you. Please try again.", volume=80)
+            continue
 
-        # Process user command with default being " I do not know how to do that"
-        if text == "quit":
+        # Process user command with default being "I do not know how to do that"
+        if text.lower() == "quit":
             tts.speak_blocking("Goodbye!", volume=80)
             break
         else:
