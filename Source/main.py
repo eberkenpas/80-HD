@@ -61,6 +61,7 @@ def main():
         with sr.Microphone(device_index=2) as source:
             print("Listening...")
             tts.speak_blocking("I am listening")
+            time.sleep(1)
             audio = recognizer.listen(source)
 
         # Recognize speech
