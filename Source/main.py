@@ -4,6 +4,7 @@ import time
 import sys
 sys.path.append('/home/pi/hiwonder-toolbox')
 import ros_robot_controller_sdk as sdk
+import subprocess
 
 SPEED = 1
 STOP = 0
@@ -15,7 +16,7 @@ def initialize_motors():
 
 def main():
     #Set Master Volume to 80%
-    tts.set_master_volume(80)
+    subprocess.run(['amixer', 'sset', 'Master', '80%'])
 
     # Initialize the motors
     board = initialize_motors()
