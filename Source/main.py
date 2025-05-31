@@ -14,6 +14,10 @@ def initialize_motors():
     return board
 
 def main():
+    #Set Master Volume to 80%
+    tts.set_master_volume(80)
+
+    # Initialize the motors
     board = initialize_motors()
     
     # Greet at startup!
