@@ -97,7 +97,7 @@ def main():
             print("Text:", text)
 
             # Make a list of words and find the one that is closest to the command list
-            command_list = ["go", "explore", "hello", "talk to me", "lucy"]
+            command_list = ["go", "explore", "hello", "talk", "lucy"]
             #make a list of the words in the text
             text_words = text.lower().split()
             # Check if the list for the closest word to the command list prioritizing the first command if there are two matches
