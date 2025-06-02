@@ -142,7 +142,7 @@ def main():
             time.sleep(1)
             tts.speak_blocking("Hello, how are you?")
             time.sleep(1)
-        if text.lower() == "talk to me":
+        if text.lower() == "talk":
             tts.speak_blocking("Ok, I will talk to you.")
             time.sleep(1)
             tts.speak_blocking("I am testing my abilities. I am 80 HD")
