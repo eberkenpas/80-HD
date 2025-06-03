@@ -24,23 +24,23 @@ def initialize_speech_recognition():
 
 def speak_introduction():
     # Greet at startup!
-    tts.speak_blocking("Hello, I am 80 H D.  It is 8:42pm ", volume=80)
+    tts.speak_blocking("Hello, I am 80 H D.", volume=80)
 
     #pause for 1 second
     time.sleep(1)
 
-    #tts.speak_blocking("I am a robot created by Ella Mae Berkenpas.", volume=80)
+    tts.speak_blocking("I am a robot created by Ella Mae Berkenpas.", volume=80)
 
     #pause for 1 second
-    #time.sleep(1)
+    time.sleep(1)
 
-    #tts.speak_blocking("I am Ella's 5th grade strengths project.", volume=80)
+    tts.speak_blocking("I am Ella's 5th grade strengths project.", volume=80)
 
     #pause for 1 second
-    #time.sleep(1)
+    time.sleep(1)
     
     #tts.speak_blocking("Please tell me what you want to do.", volume=80)
-    #time.sleep(1)
+    time.sleep(1)
 
 # def explore(board):
 #     #Test Code
@@ -95,7 +95,7 @@ def explore(board):
         time.sleep(0.5)
 
     # Going back
-    tts.speak_blocking("Going back to home after my adventure.")
+    tts.speak_blocking("That was so much fun. No I must return home.")
 
     reverse_map = {
         'forward': 'backward',
@@ -187,7 +187,7 @@ def main():
                 print("No close match found.")
                 tts.speak_blocking("I did not understand you. Please try again.")
                 failed_attempts += 1
-                if failed_attempts >= 2:
+                if failed_attempts >= 4:
                     tts.speak_blocking("I am bored.  I think I will go explorer.")
                     explore(board)
                 continue
@@ -195,7 +195,7 @@ def main():
             print("Could not understand audio.")
             tts.speak_blocking("I did not understand you. Please try again.")
             failed_attempts += 1
-            if failed_attempts >= 2:
+            if failed_attempts >= 4:
                 tts.speak_blocking("I am bored.  I think I will go explorer.")
                 explore(board)
             continue
@@ -203,7 +203,7 @@ def main():
             print("PocketSphinx error:", e)
             tts.speak_blocking("I did not understand you. Please try again.")
             failed_attempts += 1
-            if failed_attempts >= 2:
+            if failed_attempts >= 4:
                 tts.speak_blocking("I am bored.  I think I will go explorer.")
                 explore(board)
             continue
