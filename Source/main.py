@@ -8,6 +8,9 @@ sys.path.append('/home/pi/hiwonder-toolbox')
 import ros_robot_controller_sdk as sdk
 import subprocess
 
+#wait for 60 seconds for the microphones to be ready
+time.sleep(90)
+
 SPEED = 1
 STOP = 0
 
