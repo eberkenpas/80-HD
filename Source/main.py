@@ -71,7 +71,7 @@ def explore(board):
     move_history = []
 
     # Forward moves
-    for i in range(5):
+    for i in range(15):
         direction = random.choice(directions)
         move_history.append(direction)
 
@@ -127,7 +127,7 @@ def explore(board):
         board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
         time.sleep(0.5)
 
-    tts.speak_blocking("My adventure is complete.  I have so many stories to tell.")
+    tts.speak_blocking("My adventure is complete.  I have so many wonderful stories to tell.")
 
 
 def main():
@@ -147,6 +147,7 @@ def main():
 
     # Loop until the user presses 'q'
     while True:
+        failed_attempts = 0
            
         # Listen for user input
         with sr.Microphone(device_index=2) as source:
@@ -180,17 +181,30 @@ def main():
                 print(f"Closest word: {text}")
                 print("You would like me to:", text)
                 tts.speak_blocking(f"You would like me to: {text}")
+                failed_attempts = 0
             else:
                 print("No close match found.")
                 tts.speak_blocking("I did not understand you. Please try again.")
+                failed_attempts += 1
+                if failed_attempts >= 2:
+                    tts.speak_blocking("I will go explore since I cannot understand you.")
+                    explore(board)
                 continue
         except sr.UnknownValueError:
             print("Could not understand audio.")
             tts.speak_blocking("I did not understand you. Please try again.")
+            failed_attempts += 1
+            if failed_attempts >= 2:
+                tts.speak_blocking("I will go explore since I cannot understand you.")
+                explore(board)
             continue
         except sr.RequestError as e:
             print("PocketSphinx error:", e)
             tts.speak_blocking("I did not understand you. Please try again.")
+            failed_attempts += 1
+            if failed_attempts >= 2:
+                tts.speak_blocking("I am bored.  I think I will go explorer.")
+                explore(board)
             continue
 
         # Process user command with default being "I do not know how to do that"
