@@ -162,7 +162,7 @@ def main():
             print("Text:", text)
 
             # Make a list of words and find the one that is closest to the command list
-            command_list = ["go", "explore", "hello", "talk", "lucy", "dog", "quit", "shutdown"]
+            command_list = ["go", "explore", "hello", "talk", "lucy", "dog", "quit", "shutdown", "off"]
             #make a list of the words in the text
             text_words = text.lower().split()
             # Check if the list for the closest word to the command list prioritizing the first command if there are two matches
@@ -222,7 +222,7 @@ def main():
             time.sleep(1)
             tts.speak_blocking("Bark! Bark! Bark!")
             time.sleep(1)
-        if text.lower() == "quit":
+        if text.lower() in ["quit", "shutdown", "off"]:
             tts.speak_blocking("Ok, I will shut down.")
             time.sleep(1)
             break
