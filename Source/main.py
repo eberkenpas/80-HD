@@ -158,7 +158,8 @@ def main():
     while True:
            
         # Listen for user input
-        with sr.Microphone(device_index=2) as source:
+        #with sr.Microphone(device_index=2) as source:
+        with sr.Microphone() as source:
             print("Listening...")
             tts.speak_blocking("I am listening")
             time.sleep(1)
