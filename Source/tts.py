@@ -4,7 +4,7 @@ import threading
 
 # Default voice
 #VOICE = "kal"  # or "slt", "rms", "awb"
-VOICE = "slt"  # or "slt", "rms", "awb"
+VOICE = "awb"  # or "slt", "rms", "awb"
 
 def speak(text, volume=80):
     """
