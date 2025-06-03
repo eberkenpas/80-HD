@@ -82,8 +82,13 @@ def main():
     
     speak_introduction()
 
-    #Loop until the user presses 'q'
+    # Loop until the user presses 'q'
     while True:
+        # Check if 'q' was pressed
+        if sys.stdin.read(1) == 'q':
+            print("Q pressed, exiting...")
+            break
+            
         # Listen for user input
         with sr.Microphone(device_index=2) as source:
             print("Listening...")
@@ -112,7 +117,7 @@ def main():
                 text = matches[0]
 
             print(f"Closest word: {text}")
-            if text:
+            if text and matches:
                 print(f"Closest word: {text}")
                 print("You would like me to:", text)
                 tts.speak_blocking(f"You would like me to: {text}")
