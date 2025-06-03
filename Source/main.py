@@ -229,7 +229,7 @@ def main():
 
     
     tts.speak_blocking("The test is complete. Don't forget to push the little white button and wait for the red light to come on.", volume=80)
-    time.sleep(3)
+    time.sleep(1)
     tts.speak_blocking("Oh I almost forgot. You should probably charge my batteries. Goodbye.")
     time.sleep(1)
 
