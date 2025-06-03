@@ -24,7 +24,7 @@ def initialize_speech_recognition():
 
 def speak_introduction():
     # Greet at startup!
-    tts.speak_blocking("Hello, I am 80 H D.  It is 8:14pm ", volume=80)
+    tts.speak_blocking("Hello, I am 80 H D.  It is 8:20pm ", volume=80)
 
     #pause for 1 second
     time.sleep(1)
@@ -95,7 +95,7 @@ def explore(board):
         time.sleep(0.5)
 
     # Going back
-    tts.speak_blocking("Going back to home.")
+    tts.speak_blocking("Going back to home after my adventure.")
 
     reverse_map = {
         'forward': 'backward',
@@ -126,6 +126,8 @@ def explore(board):
         time.sleep(1)
         board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
         time.sleep(0.5)
+
+    tts.speak_blocking("My adventure is complete.  I have so many stories to tell.")
 
 
 def main():
@@ -160,7 +162,7 @@ def main():
             print("Text:", text)
 
             # Make a list of words and find the one that is closest to the command list
-            command_list = ["go", "explore", "hello", "talk", "lucy", "dog"]
+            command_list = ["go", "explore", "hello", "talk", "lucy", "dog", "quit", "shutdown"]
             #make a list of the words in the text
             text_words = text.lower().split()
             # Check if the list for the closest word to the command list prioritizing the first command if there are two matches
@@ -220,9 +222,16 @@ def main():
             time.sleep(1)
             tts.speak_blocking("Bark! Bark! Bark!")
             time.sleep(1)
+        if text.lower() == "quit":
+            tts.speak_blocking("Ok, I will shut down.")
+            time.sleep(1)
+            break
 
     
-    tts.speak_blocking("The test is complete. Goodbye.", volume=80)
+    tts.speak_blocking("The test is complete. Don't forget to push the little white button and wait for the red light to come on.", volume=80)
+    time.sleep(3)
+    tts.speak_blocking("Oh I almost forgot. You should probably charge my batteries. Goodbye.")
+    time.sleep(1)
 
 if __name__ == '__main__':
     main()
