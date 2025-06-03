@@ -42,11 +42,39 @@ def speak_introduction():
     #tts.speak_blocking("Please tell me what you want to do.", volume=80)
     #time.sleep(1)
 
+# def explore(board):
+#     #Test Code
+#     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
+#     for i in range(5):
+#         direction = random.choice(directions)
+#         tts.speak(f"Moving {direction}.")
+        
+#         if direction == 'forward':
+#             board.set_motor_speed([[1, SPEED], [2, SPEED], [3, -SPEED], [4, -SPEED]])
+#         elif direction == 'backward':
+#             board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, SPEED], [4, SPEED]])
+#         elif direction == 'left':
+#             board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
+#         elif direction == 'right':
+#             board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
+#         elif direction == 'turn left':
+#             board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
+#         elif direction == 'turn right':
+#             board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
+        
+#         time.sleep(1)
+#         board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
+#         time.sleep(0.5)
+
 def explore(board):
-    #Test Code
     directions = ['forward', 'backward', 'left', 'right', 'turn left', 'turn right']
+    move_history = []
+
+    # Forward moves
     for i in range(5):
         direction = random.choice(directions)
+        move_history.append(direction)
+
         tts.speak(f"Moving {direction}.")
         
         if direction == 'forward':
@@ -60,6 +88,39 @@ def explore(board):
         elif direction == 'turn left':
             board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
         elif direction == 'turn right':
+            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
+        
+        time.sleep(1)
+        board.set_motor_speed([[1, STOP], [2, STOP], [3, STOP], [4, STOP]])
+        time.sleep(0.5)
+
+    # Going back
+    tts.speak_blocking("Going back to home.")
+
+    reverse_map = {
+        'forward': 'backward',
+        'backward': 'forward',
+        'left': 'right',
+        'right': 'left',
+        'turn left': 'turn right',
+        'turn right': 'turn left'
+    }
+
+    for direction in reversed(move_history):
+        reverse_direction = reverse_map[direction]
+        tts.speak(f"Moving {reverse_direction}.")
+        
+        if reverse_direction == 'forward':
+            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, -SPEED], [4, -SPEED]])
+        elif reverse_direction == 'backward':
+            board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, SPEED], [4, SPEED]])
+        elif reverse_direction == 'left':
+            board.set_motor_speed([[1, SPEED], [2, -SPEED], [3, SPEED], [4, -SPEED]])
+        elif reverse_direction == 'right':
+            board.set_motor_speed([[1, -SPEED], [2, SPEED], [3, -SPEED], [4, SPEED]])
+        elif reverse_direction == 'turn left':
+            board.set_motor_speed([[1, SPEED], [2, SPEED], [3, SPEED], [4, SPEED]])
+        elif reverse_direction == 'turn right':
             board.set_motor_speed([[1, -SPEED], [2, -SPEED], [3, -SPEED], [4, -SPEED]])
         
         time.sleep(1)
@@ -84,11 +145,7 @@ def main():
 
     # Loop until the user presses 'q'
     while True:
-        # Check if 'q' was pressed
-        if sys.stdin.read(1) == 'q':
-            print("Q pressed, exiting...")
-            break
-            
+           
         # Listen for user input
         with sr.Microphone(device_index=2) as source:
             print("Listening...")
