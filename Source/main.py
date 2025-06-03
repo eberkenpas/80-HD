@@ -164,10 +164,8 @@ def main():
             tts.speak_blocking("Bark! Bark! Bark!")
             time.sleep(1)
 
-    tts.speak_blocking("I will now test my abilities.")
-
     
-    tts.speak_blocking("Test complete.", volume=80)
+    tts.speak_blocking("The test is complete. Goodbye.", volume=80)
 
 if __name__ == '__main__':
     main()
