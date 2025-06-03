@@ -134,8 +134,6 @@ def explore(board):
 
 def main():
 
-    time.sleep(60) #wait for 60 seconds for the microphones to be ready
-    
     #Set Master Volume to 80%
     print("Setting Master Volume to 80%")
     subprocess.run(['amixer', 'sset', 'Master', '80%'])
