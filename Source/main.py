@@ -9,7 +9,7 @@ import ros_robot_controller_sdk as sdk
 import subprocess
 
 #wait for 60 seconds for the microphones to be ready
-time.sleep(90)
+time.sleep(60)
 
 SPEED = 1
 STOP = 0
