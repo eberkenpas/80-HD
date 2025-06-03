@@ -23,7 +23,8 @@ def initialize_speech_recognition():
 
 
     recognizer = sr.Recognizer()
-    with sr.Microphone(device_index=0) as source:
+    #with sr.Microphone(device_index=0) as source:
+    with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
     return recognizer
 
