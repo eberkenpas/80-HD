@@ -24,7 +24,7 @@ def initialize_speech_recognition():
 
 def speak_introduction():
     # Greet at startup!
-    tts.speak_blocking("Hello, I am 80 H D.  It is 8:20pm ", volume=80)
+    tts.speak_blocking("Hello, I am 80 H D.  It is 8:42pm ", volume=80)
 
     #pause for 1 second
     time.sleep(1)
@@ -71,7 +71,7 @@ def explore(board):
     move_history = []
 
     # Forward moves
-    for i in range(15):
+    for i in range(7):
         direction = random.choice(directions)
         move_history.append(direction)
 
@@ -188,7 +188,7 @@ def main():
                 tts.speak_blocking("I did not understand you. Please try again.")
                 failed_attempts += 1
                 if failed_attempts >= 2:
-                    tts.speak_blocking("I will go explore since I cannot understand you.")
+                    tts.speak_blocking("I am bored.  I think I will go explorer.")
                     explore(board)
                 continue
         except sr.UnknownValueError:
@@ -196,7 +196,7 @@ def main():
             tts.speak_blocking("I did not understand you. Please try again.")
             failed_attempts += 1
             if failed_attempts >= 2:
-                tts.speak_blocking("I will go explore since I cannot understand you.")
+                tts.speak_blocking("I am bored.  I think I will go explorer.")
                 explore(board)
             continue
         except sr.RequestError as e:
