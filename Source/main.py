@@ -17,14 +17,7 @@ def initialize_motors():
     return board
 
 def initialize_speech_recognition():
-    while True:
-        mic_list = sr.Microphone.list_microphone_names()
-        print("Available microphones:", mic_list)
-        if len(mic_list) >= 3:  # Expecting at least 3 devices
-            print("Microphones ready!")
-            break
-        print("Waiting for microphones...")
-        time.sleep(2)
+
 
     recognizer = sr.Recognizer()
     with sr.Microphone(device_index=2) as source:
@@ -140,6 +133,9 @@ def explore(board):
 
 
 def main():
+
+    time.sleep(60) #wait for 60 seconds for the microphones to be ready
+    
     #Set Master Volume to 80%
     print("Setting Master Volume to 80%")
     subprocess.run(['amixer', 'sset', 'Master', '80%'])
