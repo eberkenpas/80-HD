@@ -9,7 +9,7 @@ import ros_robot_controller_sdk as sdk
 import subprocess
 
 #wait for 60 seconds for the microphones to be ready
-time.sleep(60)
+#time.sleep(60)
 
 SPEED = 1
 STOP = 0
@@ -23,8 +23,7 @@ def initialize_speech_recognition():
 
 
     recognizer = sr.Recognizer()
-    #with sr.Microphone(device_index=0) as source:
-    with sr.Microphone() as source:
+    with sr.Microphone(device_index=2) as source:
         recognizer.adjust_for_ambient_noise(source)
     return recognizer
 
@@ -158,8 +157,7 @@ def main():
     while True:
            
         # Listen for user input
-        #with sr.Microphone(device_index=2) as source:
-        with sr.Microphone() as source:
+        with sr.Microphone(device_index=2) as source:
             print("Listening...")
             tts.speak_blocking("I am listening")
             time.sleep(1)
