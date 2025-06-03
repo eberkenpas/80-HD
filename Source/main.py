@@ -82,6 +82,7 @@ def main():
     
     speak_introduction()
 
+    #Loop until the user presses 'q'
     while True:
         # Listen for user input
         with sr.Microphone(device_index=2) as source:
@@ -97,7 +98,7 @@ def main():
             print("Text:", text)
 
             # Make a list of words and find the one that is closest to the command list
-            command_list = ["go", "explore", "hello", "talk", "lucy"]
+            command_list = ["go", "explore", "hello", "talk", "lucy", "dog"]
             #make a list of the words in the text
             text_words = text.lower().split()
             # Check if the list for the closest word to the command list prioritizing the first command if there are two matches
@@ -149,6 +150,11 @@ def main():
             time.sleep(1)
         if text.lower() == "lucy":
             tts.speak_blocking("Ok, I will Lucy.")
+            time.sleep(1)
+            tts.speak_blocking("Bark! Bark! Bark!")
+            time.sleep(1)
+        if text.lower() == "dog":
+            tts.speak_blocking("Ok, I will bark like a dog.")
             time.sleep(1)
             tts.speak_blocking("Bark! Bark! Bark!")
             time.sleep(1)

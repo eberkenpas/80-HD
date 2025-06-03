@@ -13,8 +13,8 @@ def speak(text, volume=80):
     :param volume: Volume % (0-100)
     """
     def _speak():
-        subprocess.run(["amixer", "-c", "2", "sset", "Speaker", f"{volume}%"])
-        subprocess.Popen(["flite", "-voice", VOICE, "-t", text])
+        subprocess.run(["amixer", "-c", "2", "sset", "Speaker", f"{volume}%"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen(["flite", "-voice", VOICE, "-t", text], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
     threading.Thread(target=_speak, daemon=True).start()
 
@@ -25,5 +25,5 @@ def speak_blocking(text, volume=80):
     :param text: Text to speak
     :param volume: Volume % (0-100)
     """
-    subprocess.run(["amixer", "-c", "2", "sset", "Speaker", f"{volume}%"])
-    subprocess.run(["flite", "-voice", VOICE, "-t", text])
+    subprocess.run(["amixer", "-c", "2", "sset", "Speaker", f"{volume}%"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["flite", "-voice", VOICE, "-t", text], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
