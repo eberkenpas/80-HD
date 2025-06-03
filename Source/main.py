@@ -145,9 +145,10 @@ def main():
     
     speak_introduction()
 
-    # Loop until the user presses 'q'
+    failed_attempts = 0
+
+    # Loop until user says quit
     while True:
-        failed_attempts = 0
            
         # Listen for user input
         with sr.Microphone(device_index=2) as source:
@@ -249,3 +250,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+ 
